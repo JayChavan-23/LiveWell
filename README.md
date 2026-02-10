@@ -193,3 +193,10 @@ All planned features have been successfully implemented.
 The application is fully functional with all core features complete.
 
 This documentation reflects the current state of the LiveWell-N website as of the latest implementation.
+
+---
+
+## Snapshots
+<img width="1679" height="871" alt="image" src="https://github.com/user-attachments/assets/2fe9e345-5b3f-41f4-a812-da8f3a7c38f2" />
+
+
