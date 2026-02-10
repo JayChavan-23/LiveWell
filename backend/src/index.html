@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <body>
+    <pre id="log"></pre>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script>
+      const uid = "<TEST_UID>"; // put a real Firebase UID you’ll test with
+      const log = (...a) => document.getElementById('log').textContent += a.join(' ') + '\n';
+
+      const socket = io("http://localhost:4000", { transports: ["websocket"] });
+      socket.on("connect", () => {
+        log("[client] connected", socket.id);
+        socket.emit("register", uid);
+      });
+      socket.on("nudge", data => log("[client] nudge:", JSON.stringify(data)));
+      socket.on("disconnect", () => log("[client] disconnected"));
+    </script>
+  </body>
+</html>

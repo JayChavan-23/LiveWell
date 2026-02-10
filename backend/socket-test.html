@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <body>
+    <h3>LiveWell Socket Test</h3>
+    <pre id="log"></pre>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const uid = '3PEyWphYOnals1fDyYlToZ4x7UH2'; // use one UID printed in scheduler logs
+      const log = (m) => { document.getElementById('log').textContent += m + '\n'; console.log(m); };
+
+      const socket = io('http://localhost:4000', {
+        path: '/socket.io',
+        auth: { uid },
+      });
+
+      socket.on('connect', () => log('connected: ' + socket.id));
+      socket.on('welcome', (p) => log('welcome: ' + JSON.stringify(p)));
+      socket.on('nudge:new', (p) => {
+        log('NUDGE RECEIVED: ' + JSON.stringify(p));
+        socket.emit('nudge:ack', { id: p.id || null });
+      });
+      socket.on('disconnect', (r) => log('disconnected: ' + r));
+    </script>
+  </body>
+</html>
